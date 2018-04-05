@@ -1,0 +1,14 @@
+{
+  "name": "storage-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "konglx",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.1.2"
+  }
+}
