@@ -26,7 +26,7 @@ validate(
 validate(
     {
         friends: [{
-            name: 'string
+            name: 'string',
         }],
     },
     {
