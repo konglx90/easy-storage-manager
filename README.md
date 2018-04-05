@@ -36,3 +36,7 @@ validate(
     }
 ) // => true
 ```
+
+2. Why not prop-types
+
+needn't some type check, like func 
