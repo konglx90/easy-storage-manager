@@ -3,6 +3,9 @@
 ```sh
 npm install mocha -g
 npm run test  # or mocha
+
+# test index
+mocha test/index.test.js
 ```
 
 ### Easy storage manager
