@@ -2,7 +2,7 @@ const expect = require('chai').expect;
 const validate = require('../src/validate').validateEngine;
 
 const VALIDATE_TEST_CASES = [
-    {   
+    {
         title: 'validate string:string',
         validate: 'string',
         data: 'ok',
@@ -156,13 +156,18 @@ const VALIDATE_TEST_CASES = [
         }],
         expect: true,
     },
+    {
+        title: 'validate empty object:string',
+        validate: {},
+        data: 'ok',
+        expect: false,
+    },
 ]
 
-
-VALIDATE_TEST_CASES.forEach(c => {
-    describe('expect', () => {
-        it(c.title, () => {
-            expect(validate(c.validate, c.data)).to.be.equal(c.expect);
-        });
-    });
+describe('expect validate', () => {
+  VALIDATE_TEST_CASES.forEach(c => {
+          it(c.title, () => {
+              expect(validate(c.validate, c.data)).to.be.equal(c.expect);
+          });
+      });
 });

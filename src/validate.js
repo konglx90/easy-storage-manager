@@ -18,18 +18,30 @@ const validateEngine = (validate, data) => {
     if (classOf(validate) === 'string') {
         // handle or type 'string|number'
         if (!includes(validate.split('|'), classOf(data))) {
-            // console.warn(`need data is ${validate} in generateCacheApi`);
+            // console.trace(`need data is ${validate} in generateCacheApi`);
             return false;
         }
         return true;
     }
 
-    if (classOf(validate) === 'array' && validate.length > 0) {
+    if (classOf(validate) === 'array') {
         if (classOf(data) !== 'array') {
-            // console.warn('data must be a array in generateCacheApi');
+            // console.trace('data must be a array in generateCacheApi');
             return false;
         }
-        return data.every(d => validateEngine(validate[0], d));
+
+        if (validate.length > 0) {
+          return data.every(d => validateEngine(validate[0], d));
+        } else {
+          // empty Array
+          return classOf(data) === 'array';
+        }
+    }
+
+    const validateObjKeys = Object.keys(validate);
+    // empty object
+    if (validateObjKeys.length === 0) {
+      return classOf(data) === 'object';
     }
 
     return Object.keys(validate).every((key) => {
