@@ -1,4 +1,4 @@
-const validateEngine = require('./validate').validateEngine;
+const validateEngine = require('@konglx/data-validate').validateEngine;
 const fieldEqual = (a, b, field) => {
   if (!a || !b) {
     return false;
