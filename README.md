@@ -14,8 +14,25 @@ mocha test/index.test.js
 #### Import
 
 ```js
-//
+// 
 
+// 模拟 localStorage 的Api
+const localStorageSimulate = (() => {
+  const local = {};
+  return {
+    getItem: (key) => local[key],
+    setItem: (key, value) => {
+      local[key] = value;
+    }
+  }
+})()
+let localStorage;
+try {
+  localStorage = window && window.localStorage;
+} catch(e) {}
+if (!localStorage) {
+  localStorage = localStorageSimulate;
+}
 ```
 
 2. Why not `prop-types`
@@ -24,3 +41,10 @@ mocha test/index.test.js
 
 3. TODO
   - throw a error when check fail, and print the error place
+
+### Publish
+
+```js
+npm version [higher version]
+npm publish
+```
