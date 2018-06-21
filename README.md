@@ -14,8 +14,6 @@ mocha test/index.test.js
 #### Import
 
 ```js
-// 
-
 // 模拟 localStorage 的Api
 const localStorageSimulate = (() => {
   const local = {};
