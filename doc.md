@@ -22,7 +22,7 @@ localStorage.setItem(HISTORY_RECORD, [ search ]);
 
 这样简单的做法有两个主要问题: 
 
-1. 随着项目的推移, key 可能出现覆盖.
+1. 随着项目的推移, key 可能出现覆盖.
 2. 想要添加一些对数组的操作时，可能需要添加零散的函数, 如: `pop push`
 
 于是
@@ -36,7 +36,7 @@ const Keys = {
     HISTORY_RECORD: 'HISTORY_RECORD',
 }
 
-export const historyRecordStorage = generateArrayStorageApi({
+export const historyRecordStorage = generateArrayStorageApi({
     engine: window.localStorage,
     key: Keys.HISTORY_RECORD,
     validate: [{
