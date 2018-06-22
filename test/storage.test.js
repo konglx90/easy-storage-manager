@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const generateStorageApi = require('../src/storage');
+const Storage = require('../lib/storage');
 
 // 模拟 localStorage 的Api
 const localStorageSimulate = (() => {
@@ -20,24 +20,15 @@ if (!localStorage) {
 }
 // 模拟 localStorage End
 
-const commentListStorage = generateStorageApi.generateArrayStorageApi({
-  engine: localStorage,
-  key: 'CAN_COMMENT_RENT_LIST',
-  validate: [{
-    id: 'string',
-  }],
-  uniqueField: 'rentUnitId',
+const commentStorage = new Storage({
+    engine: localStorage,
+    key: 'CAN_COMMENT_RENT_LIST',
+    validate: 'string',
 });
 
 describe('expect', () => {
-  it('get array from storage null', () => {
-    expect(commentListStorage.get()).to.be.equal(null);
-  });
-
-  it('get array from storage array length 1', () => {
-    commentListStorage.set([{
-      id: '9',
-    }])
-    expect(commentListStorage.get()).to.have.lengthOf(1);
+  it('commentStorage', () => {
+    commentStorage.set('good')
+    expect(commentStorage.get()).to.be.equal('good');
   });
 });
