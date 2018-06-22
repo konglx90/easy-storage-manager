@@ -26,6 +26,14 @@ const commentStorage = new Storage({
     validate: 'string',
 });
 
+const bStorage = new Storage({
+  engine: localStorage,
+  key: 'B',
+  validate: 'string',
+});
+
+console.log(bStorage.set === commentStorage.set);
+
 describe('expect', () => {
   it('commentStorage', () => {
     commentStorage.set('good')

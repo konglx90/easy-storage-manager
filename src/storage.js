@@ -48,7 +48,7 @@ const findIndexByField = (arr, obj, field) => {
         this.defaultExpire = defaultExpire;
     }
 
-    set = (data, expire = this.defaultExpire) => {
+    set(data, expire = this.defaultExpire) {
         const { key, validate, engine } = this;
 
         // validate essential data
@@ -66,7 +66,7 @@ const findIndexByField = (arr, obj, field) => {
         return engine.setItem(key, JSON.stringify(newData));
     }
 
-    get = () => {
+    get() {
         const { engine, key } = this; 
         
         const res = engine.getItem(key);
@@ -85,7 +85,7 @@ const findIndexByField = (arr, obj, field) => {
         return data;
     }
 
-    remove = () => {
+    remove() {
         const { engine , key } = this;
 
         engine.removeItem(key);
