@@ -1,3 +1,5 @@
-const generateStoreApi = require('./src/storage');
+const storage = require('./lib/storage');
+const ArrayStorage = require('./lib/arrayStorage');
 
-module.exports = generateStoreApi;
+storage.ArrayStorage = ArrayStorage;
+module.exports = storage;

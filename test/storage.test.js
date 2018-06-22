@@ -1,5 +1,6 @@
 const expect = require('chai').expect;
-const Storage = require('../lib/storage');
+const Storage = require('../index');
+const ArrayStorage = Storage.ArrayStorage;
 
 // 模拟 localStorage 的Api
 const localStorageSimulate = (() => {
@@ -26,13 +27,20 @@ const commentStorage = new Storage({
     validate: 'string',
 });
 
-const bStorage = new Storage({
+const b = new Storage({
   engine: localStorage,
   key: 'B',
   validate: 'string',
 });
 
-console.log(bStorage.set === commentStorage.set);
+const c = new ArrayStorage({
+  engine: localStorage,
+  key: 'C',
+  validate: 'string',
+});
+
+console.log(c.push);
+console.log(b.set === commentStorage.set);
 
 describe('expect', () => {
   it('commentStorage', () => {
