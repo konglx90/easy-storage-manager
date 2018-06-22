@@ -4,6 +4,8 @@
 
 ### Use
 
+在本地需要存储搜索的历史纪录，涉及 `get set push update` 等操作.
+
 ```js
 // index.js
 import { generateArrayStorageApi } from 'easy-storage-manager';

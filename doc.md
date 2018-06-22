@@ -69,12 +69,6 @@ historyRecordStorage.push({ type: 'keywords', text: '中关村' });
 
 ### 兼容`React Native`的`AsyncStorage`
 
-### Array.prototype.every
-
-```js
-[].every(key => key) // => true
-```
-
 ### 关于单元测试
 
 1. 积极的寻找测试用例帮助你思考代码
