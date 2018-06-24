@@ -1,4 +1,5 @@
-const { validateEngine } = require('@konglx/data-validate');
+const validateEngine = require('@konglx/data-validate');
+
 const fieldEqual = (a, b, field) => {
   if (!a || !b) {
     return false;
@@ -22,7 +23,7 @@ const findIndexByField = (arr, obj, field) => {
  * Examples:
  *
  *    const userInfoStore =
- *                  generateStoreApi(localStorage, Keys.USER_INFO, 30 * MILLISECONDS_EACH_DAY)
+ *                  generateStorageApi(localStorage, Keys.USER_INFO, 30 * MILLISECONDS_EACH_DAY)
  *    userInfoStore.set({name: 'konglingxing'})
  *    const userInfo = userInfoStore.get()
  * @param {Storage} engine
@@ -32,7 +33,7 @@ const findIndexByField = (arr, obj, field) => {
  * @param {string} uniqueField 当数据是包含对象的数组时, 用来标识一个数据的身份
  * @return {object}
  */
-const generateStoreApi = (
+const generateStorageApi = (
   {
       engine,
       key,
@@ -74,12 +75,12 @@ const generateStoreApi = (
         engine.removeItem(key);
     },
 });
-const withArrayApi = (baseStorage, opts) => {
+const withArrayApi = (baseStore, opts) => {
     const {
         defaultExpire = null,
         uniqueField = null,
     } = opts;
-    return Object.assign({}, baseStorage(opts), {
+    return Object.assign({}, baseStore(opts), {
         // 添加
         push(data, expire = defaultExpire) {
             const oldData = this.get() || [];
@@ -122,8 +123,8 @@ const withArrayApi = (baseStorage, opts) => {
         },
     });
 };
-const generateArrayStoreApi = opts => withArrayApi(generateStoreApi, opts)
+const generateArrayStorageApi = opts => withArrayApi(generateStorageApi, opts)
 
-generateStoreApi.generateArrayStoreApi = generateArrayStoreApi;
+generateStorageApi.generateArrayStorageApi = generateArrayStorageApi;
 
-module.exports = generateStoreApi;
+module.exports = generateStorageApi;

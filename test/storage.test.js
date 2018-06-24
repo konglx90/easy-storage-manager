@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const generateStoreApi = require('../src/index');
+const generateStorageApi = require('../src/storage');
 
 // 模拟 localStorage 的Api
 const localStorageSimulate = (() => {
@@ -20,7 +20,7 @@ if (!localStorage) {
 }
 // 模拟 localStorage End
 
-const commentListStorage = generateStoreApi.generateArrayStoreApi({
+const commentListStorage = generateStorageApi.generateArrayStorageApi({
   engine: localStorage,
   key: 'WAIT_COMMENT_LIST',
   validate: [{

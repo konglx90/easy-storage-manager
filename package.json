@@ -1,6 +1,6 @@
 {
   "name": "easy-storage-manager",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,6 @@
     "chai": "^4.1.2"
   },
   "dependencies": {
-    "@konglx/data-validate": "^1.0.2"
+    "@konglx/data-validate": "^1.0.6"
   }
 }
