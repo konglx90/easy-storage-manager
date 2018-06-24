@@ -48,6 +48,14 @@ engine: window.localStorage, // window.sessionStorage
 
 数据验证 [more rules](https://github.com/konglx90/data-validate)
 
+如果项目已经引入prop-types, 可以选择prop-types的验证方式
+
+```js
+{
+  validate: (data) => PropTypes.checkPropTypes({ data: PropTypes.string }, { data }, 'prop', 'validate in storage')
+}
+```
+
 #### space
 
 避免键名冲突

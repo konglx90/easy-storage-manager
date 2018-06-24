@@ -17,6 +17,9 @@ const findIndexByField = (arr, obj, field) => {
     return acc;
   }, -1);
 };
+function isFunction(obj){
+  return Object.prototype.toString.call(obj)==='object Function'
+}
 /**
  * Return store Api by use store key
  *
@@ -43,11 +46,14 @@ const generateStorageApi = (
       defaultMaxAge = null,
   }) => ({
     set: (data, maxAge = defaultMaxAge) => {
-        // validate essential data
-        // 非严格限制
-        // PropTypes.checkPropTypes({ data: validate }, { data }, 'prop', `set storage ${key}`);
-        if (!validateEngine(validate, data)) {
-          throw new Error('validate fail');
+        // PropTypes checkPropTypes
+        if (isFunction(validate)) {
+          // PropTypes.checkPropTypes({ data: validate }, { data }, 'prop', `set storage ${key}`);
+          validate(data);
+        } else {
+          if (!validateEngine(validate, data)) {
+            throw new Error('validate fail');
+          }
         }
 
         const newData = {
