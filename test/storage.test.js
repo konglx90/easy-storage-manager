@@ -22,7 +22,7 @@ if (!localStorage) {
 
 const commentListStorage = generateStoreApi.generateArrayStoreApi({
   engine: localStorage,
-  key: 'CAN_COMMENT_RENT_LIST',
+  key: 'WAIT_COMMENT_LIST',
   validate: [{
     id: 'string',
   }],
