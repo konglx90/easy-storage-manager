@@ -28,6 +28,7 @@ const findIndexByField = (arr, obj, field) => {
  *    const userInfo = userInfoStore.get()
  * @param {Storage} engine
  * @param {String} key
+ * @param {Number} space
  * @param {Array} essentialData
  * @param {Number} defaultExpire
  * @param {string} uniqueField 当数据是包含对象的数组时, 用来标识一个数据的身份
@@ -36,11 +37,12 @@ const findIndexByField = (arr, obj, field) => {
 const generateStorageApi = (
   {
       engine,
+      space = '',
       key,
       validate = null,
-      defaultExpire = null,
+      defaultMaxAge = null,
   }) => ({
-    set: (data, expire = defaultExpire) => {
+    set: (data, maxAge = defaultMaxAge) => {
         // validate essential data
         // 非严格限制
         // PropTypes.checkPropTypes({ data: validate }, { data }, 'prop', `set storage ${key}`);
@@ -50,23 +52,24 @@ const generateStorageApi = (
 
         const newData = {
             data,
-            expire,
+            maxAge,
             time: new Date().getTime(),
         };
-        return engine.setItem(key, JSON.stringify(newData));
+        // TODO should cache the value of space + key
+        return engine.setItem(space + key, JSON.stringify(newData));
     },
     get: () => {
-        const res = engine.getItem(key);
+        const res = engine.getItem(space + key);
         if (!res) {
             return null;
         }
-        const { data, time, expire } = JSON.parse(res);
+        const { data, time, maxAge } = JSON.parse(res);
         // 存储永久不过期
-        if (expire === null) {
+        if (maxAge === null) {
             return data;
         }
         const now = new Date().getTime();
-        if (now - time > expire) {
+        if (now - time > maxAge) {
             return null;
         }
         return data;

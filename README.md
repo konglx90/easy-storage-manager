@@ -2,7 +2,71 @@
 
 为storage提供一种集中化管理的方法、统一的API, 以及方便的扩展。
 
-### Use
+### Feature
+
+示例:
+
+```js
+import generateStorageApi from 'easy-storage-manager';
+const enterCount = generateStorageApi({
+    engine: window.localStorage,
+    space: 'myAppName',
+    key: 'ENTER_COUNT',
+    validate: 'number',
+    defaultMaxAge: 24 * 60 * 60 * 1000, // MILLISECONDS_EACH_DAY
+});
+enterCount.set(1);
+
+// extend a method inc for enterCount
+enterCount.inc = function inc() {
+  const count = this.get() || 0;
+  this.set(count + 1);
+};
+enterCount.inc();
+enterCount.inc();
+```
+
+#### small API
+
+只有两个
+
+```js
+1. generateStorageApi
+2. generateArrayStorageApi
+```
+
+#### different storage extend
+
+1. window.sessionStorage
+2. window.localStorage
+
+```js
+engine: window.localStorage, // window.sessionStorage
+```
+
+#### validate
+
+数据验证 [more rules](https://github.com/konglx90/data-validate)
+
+#### space
+
+避免键名冲突
+
+#### defaultMaxAge
+
+设置数据过期时间
+
+```js
+const s = generateStorageApi({
+  defaultMaxAge: 1000, // 1000 毫秒，默认为不过期
+  ...
+});
+
+// 为某条数据单独设置过期时间
+s.set('', 2000); // 2000 毫秒
+```
+
+### Array Data
 
 在本地需要存储搜索的历史纪录，涉及 `get set push update` 等操作.
 
@@ -24,7 +88,7 @@ const historyRecordStorage = generateArrayStorageApi({
     uniqueField: 'text',
 });
 
-const search = { 
+const search = {
  type: 'keywords',
  text: '回龙观',
 };
@@ -33,7 +97,7 @@ historyRecordStorage.set([ search ]);
 const searches = historyRecordStorage.get();
 
 // more API
-historyRecordStorage.push({ type: 'keywords', text: '中关村' });
+historyRecordStorage.push({ type: 'keywords', text: '中关村' });
 ```
 
 [More](https://github.com/konglx90/easy-storage-manager/blob/master/doc.md)

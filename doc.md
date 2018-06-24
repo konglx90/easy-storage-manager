@@ -13,21 +13,24 @@
 
 ```js
 const HISTORY_RECORD = 'HISTORY_RECORD';
-const search = { 
+const search = {
  type: 'keywords',
  text: '回龙观',
 };
 localStorage.setItem(HISTORY_RECORD, [ search ]);
+
+// 在其他地方设置
+// localStorage.setItem(HISTORY_RECORD, [ search ]);
+// localStorage.setItem(HISTORY_RECORD, [ search ]);
+// ...
 ```
 
-这样简单的做法有两个主要问题: 
+这样简单的做法有两个主要问题:
 
 1. 随着项目的推移, key 可能出现覆盖.
 2. 想要添加一些对数组的操作时，可能需要添加零散的函数, 如: `pop push`
 
-于是
-
-storage 层
+于是 引入专门管理 storage 的一层
 ```js
 // storage.js
 import { generateArrayStorageApi } from 'easy-storage-manager';
@@ -51,7 +54,7 @@ export const historyRecordStorage = generateArrayStorageApi({
 // index.js
 import { historyRecordStorage } from './storage';
 
-const search = { 
+const search = {
  type: 'keywords',
  text: '回龙观',
 };
