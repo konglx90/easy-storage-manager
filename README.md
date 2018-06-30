@@ -51,7 +51,16 @@ engine: window.localStorage, // window.sessionStorage
 如果项目已经引入prop-types, 可以选择prop-types的验证方式
 
 ```js
-validate: (data) => PropTypes.checkPropTypes({ data: PropTypes.string }, { data }, 'prop', 'validate in storage')
+const config = {
+    validate: (data) => PropTypes.checkPropTypes({ 
+            data: PropTypes.string, // validate
+        },
+        { data },
+        'prop',
+        'validate in storage'
+    ),
+    ...
+}
 ```
 
 #### space
