@@ -117,7 +117,7 @@ historyRecordStorage.push({ type: 'keywords', text: '中关村' });
 
 [More](https://github.com/konglx90/easy-storage-manager/blob/master/doc.md)
 
-### Why not `prop-types`, but [data-validate](https://github.com/konglx90/easy-storage-manager/blob/master/doc.md)
+### Why not `prop-types`, but [data-validate](https://github.com/konglx90/data-validate)
 
 因为一开始只想简单的验证存入storage的数据, 但是通过不断的给`validate`添加功能, 我发现我要的就是一个`prop-types` `>_<`
 
