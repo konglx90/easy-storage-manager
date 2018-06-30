@@ -68,6 +68,10 @@ historyRecordStorage.push({ type: 'keywords', text: '中关村' });
 
 ### 关于封装、继承和Minix
 
+目前返回的是一个包含所有方法的新对象, 考虑有没有必要进行面向对象的改造?
+
+[Base on Class](https://github.com/konglx90/easy-storage-manager/issues/3)
+
 ### 关于异常的track
 
 ### 兼容`React Native`的`AsyncStorage`

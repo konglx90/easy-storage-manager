@@ -1,35 +1,19 @@
 const expect = require('chai').expect;
 const generateStorageApi = require('../src/storage');
 
-// 模拟 localStorage 的Api
-const localStorageSimulate = (() => {
-  const local = {};
-  return {
-    getItem: (key) => local[key],
-    setItem: (key, value) => {
-      local[key] = value;
-    }
-  }
-})()
-let localStorage;
-try {
-  localStorage = window && window.localStorage;
-} catch(e) {}
-if (!localStorage) {
-  localStorage = localStorageSimulate;
-}
-// 模拟 localStorage End
+const localStorage = require('./localStorageSimulate');
 
-const commentListStorage = generateStorageApi.generateArrayStorageApi({
-  engine: localStorage,
-  key: 'WAIT_COMMENT_LIST',
-  validate: [{
-    id: 'string',
-  }],
-  uniqueField: 'rentUnitId',
-});
 
-describe('expect', () => {
+describe('expect array storage correct', () => {
+  const commentListStorage = generateStorageApi.generateArrayStorageApi({
+    engine: localStorage,
+    key: 'WAIT_COMMENT_LIST',
+    validate: [{
+      id: 'string',
+    }],
+    uniqueField: 'rentUnitId',
+  });
+
   it('get array from storage null', () => {
     expect(commentListStorage.get()).to.be.equal(null);
   });
@@ -39,5 +23,23 @@ describe('expect', () => {
       id: '9',
     }])
     expect(commentListStorage.get()).to.have.lengthOf(1);
+  });
+
+  it('set array from storage array length 1', () => {
+    commentListStorage.set([{
+      id: '9',
+    }])
+    expect(commentListStorage.get()).to.have.lengthOf(1);
+  });
+});
+
+
+describe('expect validate', () => {
+  const storage = generateStorageApi({
+    engine: localStorage,
+    key: 'NO_VALIDATE',
+  });
+  it('no validate', () => {
+    expect(storage.set('foo')).to.be.equal(undefined);
   });
 });

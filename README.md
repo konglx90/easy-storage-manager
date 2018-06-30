@@ -31,8 +31,8 @@ enterCount.inc();
 只有两个
 
 ```js
-1. generateStorageApi
-2. generateArrayStorageApi
+generateStorageApi // => get set 
+generateArrayStorageApi // => get set push pop update
 ```
 
 #### different storage extend
@@ -51,9 +51,7 @@ engine: window.localStorage, // window.sessionStorage
 如果项目已经引入prop-types, 可以选择prop-types的验证方式
 
 ```js
-{
-  validate: (data) => PropTypes.checkPropTypes({ data: PropTypes.string }, { data }, 'prop', 'validate in storage')
-}
+validate: (data) => PropTypes.checkPropTypes({ data: PropTypes.string }, { data }, 'prop', 'validate in storage')
 ```
 
 #### space
@@ -110,7 +108,7 @@ historyRecordStorage.push({ type: 'keywords', text: '中关村' });
 
 [More](https://github.com/konglx90/easy-storage-manager/blob/master/doc.md)
 
-### Why not `prop-types`
+### Why not `prop-types`, but [data-validate](https://github.com/konglx90/easy-storage-manager/blob/master/doc.md)
 
 因为一开始只想简单的验证存入storage的数据, 但是通过不断的给`validate`添加功能, 我发现我要的就是一个`prop-types` `>_<`
 

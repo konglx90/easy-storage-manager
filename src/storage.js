@@ -26,7 +26,11 @@ function isFunction(obj){
  * Examples:
  *
  *    const userInfoStore =
- *                  generateStorageApi(localStorage, Keys.USER_INFO, 30 * MILLISECONDS_EACH_DAY)
+ *                  generateStorageApi({
+ *                     engine: localStorage,
+ *                     key: Keys.USER_INFO, 
+ *                     defaultMaxAge: 30 * MILLISECONDS_EACH_DAY
+ *                  })
  *    userInfoStore.set({name: 'konglingxing'})
  *    const userInfo = userInfoStore.get()
  * @param {Storage} engine
@@ -51,7 +55,7 @@ const generateStorageApi = (
           // PropTypes.checkPropTypes({ data: validate }, { data }, 'prop', `set storage ${key}`);
           validate(data);
         } else {
-          if (!validateEngine(validate, data)) {
+          if (validate && !validateEngine(validate, data)) {
             throw new Error('validate fail');
           }
         }
